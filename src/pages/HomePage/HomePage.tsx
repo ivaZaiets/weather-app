@@ -17,6 +17,8 @@ const HomePage = () => {
   const { weather } = useAppSelector((state) => state.weather);
 
   const isInitialRender = useRef(true);
+  const sliderRef = useRef<Slider | null>(null);
+
   const [city, setCity] = useState("");
   const [isActiveSidebar, setIsActiveSidebar] = useState("inactive");
 
@@ -35,26 +37,28 @@ const HomePage = () => {
         dispatch(getWeatherThunk(city.name));
       });
     }
+
+    if (cities.length > 0) {
+      dispatch(setCurrentCity(cities[0]));
+
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(0);
+      }
+    }
   }, [cities, dispatch]);
 
   useEffect(() => {
-    if (weather) dispatch(set(weather));
+    if (weather) {
+      dispatch(set(weather));
+
+      dispatch(
+        getHourlyWeatherThunk({
+          lat: weather.coord.lat,
+          lon: weather.coord.lon,
+        }),
+      );
+    }
   }, [weather, dispatch]);
-
-  useEffect(() => {
-    if (!weather) return;
-
-    dispatch(
-      getHourlyWeatherThunk({
-        lat: weather?.coord.lat,
-        lon: weather?.coord.lon,
-      }),
-    );
-  }, [dispatch, weather]);
-
-  useEffect(() => {
-    dispatch(setCurrentCity(cities[0]));
-  }, [dispatch, cities]);
 
   const settings = {
     dots: false,
@@ -112,7 +116,7 @@ const HomePage = () => {
         </div>
 
         {cities.length > 1 ? (
-          <Slider {...settings} className={s.main_content}>
+          <Slider ref={sliderRef} {...settings} className={s.main_content}>
             {cities.map((city) => (
               <Fragment key={city.name}>
                 <WeatherInfo city={city} />
