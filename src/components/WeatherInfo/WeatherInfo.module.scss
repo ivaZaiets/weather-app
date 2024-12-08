@@ -1,0 +1,214 @@
+@import "../../styles/mixins.scss";
+
+.main_info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+
+  @include onTablet {
+    margin-top: 40px;
+  }
+
+  @include onMobile {
+    align-items: center;
+    margin-top: 25px;
+  }
+
+  .temp_block {
+    display: flex;
+
+    .temp {
+      margin: 0;
+      font-size: 164px;
+      font-weight: 200;
+      color: white;
+
+      @include onTablet {
+        font-size: 132px;
+      }
+
+      @include onMobile {
+        font-size: 112px;
+      }
+    }
+
+    .icon {
+      align-self: center;
+      width: 120px;
+      height: 120px;
+
+      @include onMobile {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  }
+
+  .city_block {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    width: 165px;
+    margin-top: 6px;
+
+    .icon {
+      width: 35px;
+      height: 35px;
+      flex-shrink: 0;
+
+      @include onMobile {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .city {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 200;
+      color: white;
+
+      @include onMobile {
+        font-size: 32px;
+      }
+    }
+  }
+
+  .details {
+    display: flex;
+    margin-top: 40px;
+
+    @include onTablet {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @include onMobile {
+      margin-top: 20px;
+    }
+
+    &_wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .icon {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+      }
+
+      .content_block {
+        display: flex;
+        gap: 18px;
+        margin: 0 50px 0 0;
+        font-size: 22px;
+        font-weight: 200;
+        color: white;
+
+        @include onTablet {
+          margin: 0;
+        }
+
+        @include onMobile {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.forecast {
+  display: flex;
+  gap: 20px;
+  max-width: 100%;
+  margin-top: 60px;
+  padding: 10px 6px;
+  overflow-x: auto;
+
+  @include onMobile {
+    margin-top: 40px;
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 20px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.8);
+    cursor: grab;
+  }
+
+  &:hover::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .weather_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 20px;
+    background: linear-gradient(
+      40deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+
+    @include onTablet {
+      padding: 16px;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      border: 1px solid white;
+    }
+
+    .icon {
+      width: 25px;
+      height: 25px;
+      margin-block: 6px;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.remove_btn {
+  display: inline-block;
+  width: 130px;
+  margin: 40px 0 0 6px;
+  padding: 10px 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  color: white;
+  transition: border 0.3s ease-out;
+  cursor: pointer;
+
+  @include onMobile {
+    margin-top: 20px;
+  }
+
+  &:hover {
+    border: 1px solid white;
+  }
+}
