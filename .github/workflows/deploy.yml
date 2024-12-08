@@ -20,7 +20,14 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
+      - name: Set up environment variables
+        env:
+          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+        run: echo "VITE_APP_ID=${{ secrets.VITE_APP_ID }}" >> .env
+
       - name: Build project
+        env:
+          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
         run: npm run build
 
       - name: Upload production-ready build files
