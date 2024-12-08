@@ -16,18 +16,19 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Set up environment variables
-        env:
-          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
-        run: echo "VITE_APP_ID=${{ secrets.VITE_APP_ID }}" >> .env
+        run: echo "VITE_APP_ID=${{ secrets.VITE_APP_ID }}" > .env
+
+      - name: Debug environment variables
+        run: cat .env
 
       - name: Build project
-        env:
-          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
         run: npm run build
 
       - name: Upload production-ready build files
@@ -54,3 +55,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
